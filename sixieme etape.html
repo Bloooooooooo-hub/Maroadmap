@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Étape Finale - Résumé</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+      font-family: 'Space+Grotesk', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+    #dyn-island {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #000;
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 32px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1rem;
+    }
+    .green-dot {
+      width: 10px;
+      height: 10px;
+      background-color: #2ecc71;
+      border-radius: 50%;
+    }
+    .photo-frame {
+      width: 200px;
+      height: 200px;
+      border: 4px solid #2ecc71;
+      border-radius: 16px;
+      background-color: #f0f0f0;
+      background-size: cover;
+      background-position: center;
+      margin-top: 100px;
+    }
+    h2 {
+      color: #2ecc71;
+      margin-top: 30px;
+    }
+    .summary-box {
+      margin-top: 20px;
+      border: 2px solid #2ecc71;
+      border-radius: 12px;
+      padding: 20px;
+      max-width: 800px;
+      width: 100%;
+      background: #f0fff5;
+      text-align: left;
+    }
+    .total-box {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #333;
+      background: #eafaf0;
+      padding: 10px 20px;
+      border-radius: 10px;
+    }
+    .currency-selector {
+      margin-top: 10px;
+    }
+    .validate-btn {
+      margin-top: 30px;
+      padding: 12px 24px;
+      font-size: 1rem;
+      background-color: #2ecc71;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .note {
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div id="dyn-island">
+    MaRoadMap <div class="green-dot"></div> • Étape Finale
+  </div>
+  <div class="photo-frame" style="background-image: url('https://images.unsplash.com/photo-1618411442570-6fae202ea36d');"></div>
+  <h2>Récapitulatif de vos choix</h2>
+  <div class="summary-box" id="recap">
+    <h3>site</h3>
+    <ul>
+      <li><strong>Studio Code</strong> - Création site vitrine 400€</li>
+      <li><strong>WebExpress</strong> - Développement landing page 150€</li>
+    </ul>
+    <h3>design</h3>
+    <ul>
+      <li><strong>Graphik Line</strong> - Identité visuelle 270€</li>
+    </ul>
+  </div>
+  <div class="total-box" id="estimation">
+    Estimation totale : <span id="prixTotal">820€</span> (prix indicatif)
+  </div>
+  <div class="currency-selector">
+    <label for="devise">Changer la devise : </label>
+    <select id="devise" onchange="changerDevise()">
+      <option value="EUR">EUR (€)</option>
+      <option value="USD">USD ($)</option>
+      <option value="XOF">XOF (F CFA)</option>
+    </select>
+  </div>
+  <div class="note">Chaque professionnel sélectionné recevra une notification avec votre demande.</div>
+  <button class="validate-btn" onclick="envoyerDemandes()">Envoyer les demandes aux professionnels</button>
+
+  <script>
+    function changerDevise() {
+      const select = document.getElementById("devise");
+      const prix = document.getElementById("prixTotal");
+      const valeur = select.value;
+      let montant = 820;
+      let symbole = "€";
+      if (valeur === "USD") {
+        montant = (montant * 1.08).toFixed(2);
+        symbole = "$";
+      } else if (valeur === "XOF") {
+        montant = (montant * 655.957).toFixed(0);
+        symbole = "F CFA";
+      }
+      prix.textContent = montant + symbole;
+    }
+
+    function envoyerDemandes() {
+      alert("Vos demandes ont été envoyées aux professionnels sélectionnés !");
+    }
+  </script>
+</body>
+</html>
+
+

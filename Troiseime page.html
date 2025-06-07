@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Étape 3 – Choix du produit</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+      font-family: 'Space Grotesk', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    #dyn-island {
+      position: absolute;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #dyn-island .header {
+      background: #000;
+      color: #fff;
+      font-size: 1rem;
+      border-radius: 32px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      padding: 12px 24px;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      height: 48px;
+    }
+
+    .svg-icon {
+      width: 20px;
+      height: 20px;
+      animation: rotate 3s linear infinite;
+    }
+
+    .green-dot {
+      width: 10px;
+      height: 10px;
+      background-color: #2ecc71;
+      border-radius: 50%;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .main-content {
+      margin-top: 160px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 0 20px;
+    }
+
+    .photo-frame {
+      width: 200px;
+      height: 200px;
+      border: 4px solid #2ecc71;
+      border-radius: 16px;
+      background-color: #f0f0f0;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .step-title {
+      font-size: 1.2rem;
+      color: #333;
+      text-align: center;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+      max-width: 1000px;
+      width: 100%;
+      justify-items: center;
+    }
+
+    .product-card {
+      border: 2px solid #2ecc71;
+      border-radius: 16px;
+      padding: 16px;
+      background-color: #f9f9f9;
+      text-align: center;
+      transition: transform 0.3s ease;
+      width: 220px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .product-image {
+      width: 100%;
+      height: 120px;
+      border-radius: 12px;
+      background-color: #e0e0e0;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .product-card h3 {
+      font-size: 1rem;
+      color: #2ecc71;
+      margin: 0;
+    }
+
+    .product-card p {
+      font-size: 0.9rem;
+      color: #555;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Dynamic Island -->
+  <div id="dyn-island">
+    <div class="header">
+      <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M12 6v6l4 2" />
+      </svg>
+      MaRoadMap
+      <div class="green-dot"></div>
+      • Troisième étape
+    </div>
+  </div>
+
+  <!-- Contenu central -->
+  <div class="main-content">
+    <div class="photo-frame" style="background-image: url('/Users/bahloic/Downloads/portfolio/logo-ma-roadmap.png');"></div>
+
+    <div class="step-title">Choisissez le produit qui vous convient le mieux.</div>
+
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-image" style="background-image: url('/Users/bahloic/Downloads/portfolio/tisane1.jpg');"></div>
+        <h3>Tisanes de Provence</h3>
+        <p>Tisanes cultivées dans le sud de la France<Br> <Br><Br>Vous en saurez plus un peu plus loin 😉</p>
+      </div>
+      <div class="product-card">
+        <div class="product-image" style="background-image: url('/Users/bahloic/Downloads/portfolio/tisane2.jpg');"></div>
+        <h3>Tisanes d’Espagne</h3>
+        <p>Tisanes cultivées en Espagne<Br><Br><Br> Vous en saurez plus un peu plus loin 😉</p>
+      </div>
+      <div class="product-card">
+        <div class="product-image" style="background-image: url('/Users/bahloic/Downloads/portfolio/tisane3.jpg');"></div>
+        <h3>Tisanes marocaines</h3>
+        <p>Tisanes des montagnes marocaines<Br><Br><Br> Vous en saurez plus un peu plus loin 😉</p>
+      </div>
+      <div class="product-card">
+        <div class="product-image" style="background-image: url('/Users/bahloic/Downloads/portfolio/tisane4.jpg');"></div>
+        <h3>Tisanes bio</h3>
+        <p>Tisanes issues de cultures biologiques<Br><Br><Br> Vous en saurez plus un peu plus loin 😉</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
+
