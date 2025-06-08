@@ -282,19 +282,29 @@
     }
   </style>
 </head>
+<style>
+    .reset-btn {
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .reset-btn:hover {
+      background-color: #c0392b;
+    }
+  </style>
+</head>
 <body>
-  <div class="reset-container">
-    <h1>Réinitialiser MaRoadMap</h1>
-    <p>Cette action effacera toutes vos sélections et estimations précédentes.</p>
-    <button class="reset-btn" onclick="resetRoadmap()">Réinitialiser</button>
-    <div class="note">Vous serez redirigé vers la première étape.</div>
-  </div>
+  <button class="reset-btn" onclick="resetRoadmap()">Réinitialiser</button>
 
   <script>
     function resetRoadmap() {
       localStorage.clear();
       alert("Toutes vos données ont été supprimées. Vous allez revenir à l'étape de départ.");
-      window.location.href = "premiere.html"; // Change this to your first step page name
+      window.location.href = "premiere.html";
     }
   </script>
 </body>
