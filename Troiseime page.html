@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Étape 3 – Choix du produit</title>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -69,7 +67,6 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       gap: 20px;
       width: 100%;
       padding: 0 20px;
@@ -211,61 +208,34 @@
       </div>
     </div>
 
-    <!-- Affichage du produit sélectionné -->
     <div id="produit-selectionne">Aucun produit sélectionné</div>
 
-    <!-- Bouton de validation -->
     <button class="search-button" onclick="window.location.href='quatrieme page.html'">
       Validez votre choix
     </button>
   </div>
 
   <script>
-   <script>
-  function selectProduct(el, produitNom) {
-    // Si déjà sélectionné → on retire
-    if (el.classList.contains('selected')) {
-      el.classList.remove('selected');
-    } else {
-      // Vérifie combien sont déjà sélectionnés
-      const selected = document.querySelectorAll('.product-card.selected');
-      if (selected.length >= 3) {
-        alert("Vous pouvez sélectionner jusqu'à 3 produits maximum.");
-        return;
+    function selectProduct(el, produitNom) {
+      // Toggle sélection
+      if (el.classList.contains('selected')) {
+        el.classList.remove('selected');
+      } else {
+        const selected = document.querySelectorAll('.product-card.selected');
+        if (selected.length >= 3) {
+          alert("Vous pouvez sélectionner jusqu'à 3 produits maximum.");
+          return;
+        }
+        el.classList.add('selected');
       }
-      el.classList.add('selected');
-    }
 
-    // Mise à jour du localStorage
-    const noms = Array.from(document.querySelectorAll('.product-card.selected h3')).map(h3 => h3.textContent);
-    localStorage.setItem("produitSelectionne", JSON.stringify(noms));
+      // Mise à jour affichage + localStorage
+      const noms = Array.from(document.querySelectorAll('.product-card.selected h3')).map(h3 => h3.textContent);
+      localStorage.setItem("produitSelectionne", JSON.stringify(noms));
 
-    // Mise à jour du texte affiché
-    document.getElementById("produit-selectionne").textContent = noms.length
-      ? `Produits sélectionnés : ${noms.join(", ")}`
-      : "Aucun produit sélectionné";
-  }
-
-
-
-  // Mettre à jour localStorage avec les titres sélectionnés
-  const noms = Array.from(document.querySelectorAll('.product-card.selected h3')).map(h3 => h3.textContent);
-  localStorage.setItem("produitSelectionne", JSON.stringify(noms));
-
-  // Afficher
-  document.getElementById("produit-selectionne").textContent = noms.length > 0
-    ? `Produits sélectionnés : ${noms.join(", ")}`
-    : "Aucun produit sélectionné";
-}
-
-      // Marquer le produit sélectionné
-      el.classList.add('selected');
-
-      // Enregistrer dans localStorage
-      localStorage.setItem("produitSelectionne", produitNom);
-
-      // Afficher dans la zone de texte
-      document.getElementById("produit-selectionne").textContent = `Produit sélectionné : ${produitNom}`;
+      document.getElementById("produit-selectionne").textContent = noms.length
+        ? `Produits sélectionnés : ${noms.join(", ")}`
+        : "Aucun produit sélectionné";
     }
   </script>
 
