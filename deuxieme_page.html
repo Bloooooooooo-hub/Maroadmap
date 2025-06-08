@@ -154,6 +154,64 @@
       
     </div>
   </div>
+<style>
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background-color: #fff;
+      margin: 0;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+    .reset-container {
+      background: #f9f9f9;
+      border: 2px solid #2ecc71;
+      border-radius: 16px;
+      padding: 30px;
+      max-width: 500px;
+      width: 100%;
+    }
+    h1 {
+      color: #2ecc71;
+    }
+    .reset-btn {
+      margin-top: 20px;
+      padding: 12px 24px;
+      font-size: 1rem;
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .reset-btn:hover {
+      background-color: #c0392b;
+    }
+    .note {
+      margin-top: 15px;
+      font-size: 0.9rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="reset-container">
+    <h1>Réinitialiser MaRoadMap</h1>
+    <p>Cette action effacera toutes vos sélections et estimations précédentes.</p>
+    <button class="reset-btn" onclick="resetRoadmap()">Réinitialiser</button>
+    <div class="note">Vous serez redirigé vers la première étape.</div>
+  </div>
 
+  <script>
+    function resetRoadmap() {
+      localStorage.clear();
+      alert("Toutes vos données ont été supprimées. Vous allez revenir à l'étape de départ.");
+      window.location.href = "premiere.html"; // Change this to your first step page name
+    }
+  </script>
 </body>
 </html>
