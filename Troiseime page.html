@@ -136,6 +136,23 @@
       font-size: 0.9rem;
       color: #555;
       margin: 0;
+
+      .search-button {
+  margin-top: 30px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  color: white;
+  background-color: #2ecc71;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+  background-color: #27ae60;
+}
+
     }
   </style>
 </head>
@@ -166,6 +183,7 @@
         <h3>Tisanes de Provence</h3>
         <p>Tisanes cultivées dans le sud de la France<Br> <Br><Br>Vous en saurez plus un peu plus loin 😉</p>
       </div>
+      
       <div class="product-card">
         <div class="product-image" style="background-image: url('/Users/bahloic/Downloads/portfolio/tisane2.jpg');"></div>
         <h3>Tisanes d’Espagne</h3>
@@ -183,6 +201,10 @@
       </div>
     </div>
   </div>
+<!-- Bouton de validation -->
+<button class="search-button" onclick="window.location.href='quatrieme page.html'">
+  Validez votre choix
+</button>
 
 </body>
 </html>
