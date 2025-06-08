@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Étape 4 – Mise en œuvre</title>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
   <style>
@@ -115,7 +115,7 @@
 
     .button-row button {
       flex: 1;
-      padding: 10px 18px;
+      padding: 12px 24px;
       background-color: #2ecc71;
       color: white;
       border: none;
@@ -177,11 +177,18 @@
 
     .next-step button {
       background-color: #2ecc71;
+      color: white;
+      border: none;
+      border-radius: 24px;
       padding: 12px 32px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
     }
 
     .next-step button:hover {
       background-color: #27ae60;
+      transform: scale(1.02);
     }
   </style>
 </head>
@@ -222,8 +229,11 @@
     <div class="summary-title" id="summaryTitle" style="display:none;">✅ Acquis & noté :</div>
     <div class="summary-list" id="summaryList"></div>
 
+    <div class="summary-title">🛍️ Produits précédemment sélectionnés :</div>
+    <div class="summary-list" id="selectedProducts"></div>
+
     <div class="next-step">
-      <button onclick="goToNext()">Étape suivante</button>
+      <button onclick="window.location.href='Cinquieme page.html'">Étape suivante</button>
     </div>
   </div>
 
@@ -232,6 +242,7 @@
     const entriesContainer = document.getElementById('userEntries');
     const summaryTitle = document.getElementById('summaryTitle');
     const summaryContainer = document.getElementById('summaryList');
+    const selectedProductsContainer = document.getElementById('selectedProducts');
 
     let entries = [];
 
@@ -241,12 +252,14 @@
         entries.push(value);
         input.value = '';
         renderEntries();
+        localStorage.setItem("userNeeds", JSON.stringify(entries)); // Sauvegarde
       }
     }
 
     function removeEntry(index) {
       entries.splice(index, 1);
       renderEntries();
+      localStorage.setItem("userNeeds", JSON.stringify(entries));
     }
 
     function renderEntries() {
@@ -270,12 +283,22 @@
       });
     }
 
-    function goToNext() {
-      alert("Étape suivante à venir ! ✅");
-    }
+    // 🔁 Affichage des produits sélectionnés (étape précédente)
+    const choix = JSON.parse(localStorage.getItem("produitSelectionne") || "[]");
+    choix.forEach(item => {
+      const tag = document.createElement('div');
+      tag.className = 'entry-tag';
+      tag.textContent = item;
+      selectedProductsContainer.appendChild(tag);
+    });
+
+    // 🔁 Restauration des entrées saisies si rechargement
+    window.addEventListener('load', () => {
+      const saved = JSON.parse(localStorage.getItem("userNeeds") || "[]");
+      entries = saved;
+      renderEntries();
+    });
   </script>
 
 </body>
 </html>
-
-
