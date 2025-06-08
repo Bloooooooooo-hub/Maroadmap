@@ -11,7 +11,7 @@
       margin: 0;
       padding: 0;
       background-color: #fff;
-      font-family: 'Space+Grotesk', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -98,19 +98,9 @@
   </div>
   <div class="photo-frame" style="background-image: url('https://images.unsplash.com/photo-1618411442570-6fae202ea36d');"></div>
   <h2>Récapitulatif de vos choix</h2>
-  <div class="summary-box" id="recap">
-    <h3>site</h3>
-    <ul>
-      <li><strong>Studio Code</strong> - Création site vitrine 400€</li>
-      <li><strong>WebExpress</strong> - Développement landing page 150€</li>
-    </ul>
-    <h3>design</h3>
-    <ul>
-      <li><strong>Graphik Line</strong> - Identité visuelle 270€</li>
-    </ul>
-  </div>
+  <div class="summary-box" id="recap"></div>
   <div class="total-box" id="estimation">
-    Estimation totale : <span id="prixTotal">820€</span> (prix indicatif)
+    Estimation totale : <span id="prixTotal">0€</span> (prix indicatif)
   </div>
   <div class="currency-selector">
     <label for="devise">Changer la devise : </label>
@@ -124,27 +114,45 @@
   <button class="validate-btn" onclick="envoyerDemandes()">Envoyer les demandes aux professionnels</button>
 
   <script>
+    const recapContainer = document.getElementById('recap');
+    const totalBox = document.getElementById('prixTotal');
+    const selections = JSON.parse(localStorage.getItem("selectedProfessionals")) || {};
+    let total = 0;
+
+    function renderRecap() {
+      recapContainer.innerHTML = '';
+      for (const [cat, items] of Object.entries(selections)) {
+        if (items.length) {
+          recapContainer.innerHTML += `<h3>${cat}</h3><ul>` + items.map(item => {
+            const match = item.desc.match(/([\d.,]+)/);
+            const price = match ? parseFloat(match[1].replace(',', '.')) : 0;
+            total += price;
+            return `<li><strong>${item.name}</strong> - ${item.desc}</li>`;
+          }).join('') + '</ul>';
+        }
+      }
+      totalBox.textContent = total.toFixed(2) + '€';
+    }
+
     function changerDevise() {
-      const select = document.getElementById("devise");
-      const prix = document.getElementById("prixTotal");
-      const valeur = select.value;
-      let montant = 820;
-      let symbole = "€";
-      if (valeur === "USD") {
-        montant = (montant * 1.08).toFixed(2);
+      const devise = document.getElementById("devise").value;
+      let converted = total;
+      let symbole = '€';
+      if (devise === "USD") {
+        converted = (total * 1.08).toFixed(2);
         symbole = "$";
-      } else if (valeur === "XOF") {
-        montant = (montant * 655.957).toFixed(0);
+      } else if (devise === "XOF") {
+        converted = (total * 655.957).toFixed(0);
         symbole = "F CFA";
       }
-      prix.textContent = montant + symbole;
+      totalBox.textContent = converted + symbole;
     }
 
     function envoyerDemandes() {
       alert("Vos demandes ont été envoyées aux professionnels sélectionnés !");
     }
+
+    renderRecap();
   </script>
 </body>
 </html>
-
-
