@@ -290,5 +290,31 @@
       alert("Vous avez validé :\n" + [...previousProducts, ...entries].join(', '));
     }
   </script>
+
+  <style>
+    .reset-btn {
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .reset-btn:hover {
+      background-color: #c0392b;
+    }
+  </style>
+</head>
+<body>
+  <button class="reset-btn" onclick="resetRoadmap()">Réinitialiser</button>
+
+  <script>
+    function resetRoadmap() {
+      localStorage.clear();
+      alert("Toutes vos données ont été supprimées. Vous allez revenir à l'étape de départ.");
+      window.location.href = "index.html";
+    }
+  </script>
 </body>
 </html>
