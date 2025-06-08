@@ -7,17 +7,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; }
-
     body {
       margin: 0;
       padding: 0;
       background-color: #fff;
       font-family: 'Space Grotesk', sans-serif;
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      flex-direction: row;
       min-height: 100vh;
-      position: relative;
     }
 
     #dyn-island {
@@ -62,13 +59,36 @@
       to { transform: rotate(360deg); }
     }
 
+    .sidebar {
+      width: 300px;
+      padding: 20px;
+      border-right: 2px solid #eee;
+      background: #f9f9f9;
+    }
+
+    .sidebar h3 {
+      color: #2ecc71;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .sidebar ul li {
+      background: #e1f7e4;
+      margin-bottom: 10px;
+      padding: 8px 12px;
+      border-radius: 10px;
+    }
+
     .main-content {
       margin-top: 160px;
+      flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 20px;
-      width: 100%;
       padding: 0 20px;
     }
 
@@ -130,8 +150,7 @@
       transform: scale(1.02);
     }
 
-    .user-entries, .summary-list {
-      margin-top: 10px;
+    .user-entries {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
@@ -162,32 +181,20 @@
       border: none;
       cursor: pointer;
     }
-
-    .summary-title {
-      margin-top: 30px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: #2ecc71;
-      text-align: center;
-    }
-
-    .next-step {
-      margin-top: 40px;
-    }
-
-    .next-step button {
-      background-color: #2ecc71;
-      padding: 12px 32px;
-    }
-
-    .next-step button:hover {
-      background-color: #27ae60;
-    }
   </style>
 </head>
 <body>
+  <div class="sidebar">
+    <h3>Choix précédents</h3>
+    <ul id="previousChoices">
+      <li>Projet : Boutique en ligne</li>
+      <li>Nom : MonShop</li>
+      <li>Clientèle : B2C</li>
+    </ul>
+    <h3>Ajouts en cours</h3>
+    <ul id="liveChoices"></ul>
+  </div>
 
-  <!-- Dynamic Island -->
   <div id="dyn-island">
     <div class="header">
       <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -200,15 +207,12 @@
     </div>
   </div>
 
-  <!-- Contenu principal -->
   <div class="main-content">
     <div class="photo-frame" style="background-image: url('https://images.unsplash.com/photo-1618411442570-6fae202ea36d');"></div>
-
     <div class="step-title">
       De quoi avez-vous besoin pour concrétiser votre projet ?<br>
       (ex : sachets personnalisés, site internet…)
     </div>
-
     <div class="input-wrapper">
       <input type="text" id="needsInput" placeholder="Tapez ici…">
       <div class="button-row">
@@ -216,23 +220,13 @@
         <button onclick="validateEntries()">Valider</button>
       </div>
     </div>
-
     <div class="user-entries" id="userEntries"></div>
-
-    <div class="summary-title" id="summaryTitle" style="display:none;">✅ Acquis & noté :</div>
-    <div class="summary-list" id="summaryList"></div>
-
-    <div class="next-step">
-      <button onclick="goToNext()">Étape suivante</button>
-    </div>
   </div>
 
   <script>
     const input = document.getElementById('needsInput');
     const entriesContainer = document.getElementById('userEntries');
-    const summaryTitle = document.getElementById('summaryTitle');
-    const summaryContainer = document.getElementById('summaryList');
-
+    const liveList = document.getElementById('liveChoices');
     let entries = [];
 
     function addEntry() {
@@ -251,29 +245,22 @@
 
     function renderEntries() {
       entriesContainer.innerHTML = '';
+      liveList.innerHTML = '';
       entries.forEach((item, index) => {
         const tag = document.createElement('div');
         tag.className = 'entry-tag';
         tag.innerHTML = `${item} <button onclick="removeEntry(${index})">×</button>`;
         entriesContainer.appendChild(tag);
+
+        const li = document.createElement('li');
+        li.textContent = item;
+        liveList.appendChild(li);
       });
     }
 
     function validateEntries() {
-      summaryTitle.style.display = 'block';
-      summaryContainer.innerHTML = '';
-      entries.forEach(item => {
-        const tag = document.createElement('div');
-        tag.className = 'entry-tag';
-        tag.textContent = item;
-        summaryContainer.appendChild(tag);
-      });
-    }
-
-    function goToNext() {
-      alert("Étape suivante à venir ! ✅");
+      alert("Vous avez validé :\n" + entries.join(', '));
     }
   </script>
-
 </body>
 </html>
