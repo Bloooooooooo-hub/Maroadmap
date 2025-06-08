@@ -70,7 +70,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 20px;
       width: 100%;
       padding: 0 20px;
     }
@@ -106,15 +106,21 @@
       padding: 16px;
       background-color: #f9f9f9;
       text-align: center;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, border 0.3s ease, background-color 0.3s ease;
       width: 220px;
       display: flex;
       flex-direction: column;
       gap: 10px;
+      cursor: pointer;
     }
 
     .product-card:hover {
       transform: translateY(-4px);
+    }
+
+    .product-card.selected {
+      border: 3px solid #27ae60;
+      background-color: #eaffea;
     }
 
     .product-image {
@@ -136,23 +142,28 @@
       font-size: 0.9rem;
       color: #555;
       margin: 0;
+    }
 
-      .search-button {
-  margin-top: 30px;
-  padding: 12px 24px;
-  font-size: 1rem;
-  color: white;
-  background-color: #2ecc71;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+    .search-button {
+      margin-top: 30px;
+      padding: 12px 24px;
+      font-size: 1rem;
+      color: white;
+      background-color: #2ecc71;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
 
-.search-button:hover {
-  background-color: #27ae60;
-}
+    .search-button:hover {
+      background-color: #27ae60;
+    }
 
+    #produit-selectionne {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #2ecc71;
     }
   </style>
 </head>
@@ -178,34 +189,52 @@
     <div class="step-title">Choisissez le produit qui vous convient le mieux.</div>
 
     <div class="product-grid">
-      <div class="product-card">
+      <div class="product-card" onclick="selectProduct(this, 'Tisanes de Provence')">
         <div class="product-image" style="background-image: url('/Users/bahloic/Downloads/portfolio/tisane1.jpg');"></div>
         <h3>Tisanes de Provence</h3>
-        <p>Tisanes cultivées dans le sud de la France<Br> <Br><Br>Vous en saurez plus un peu plus loin 😉</p>
+        <p>Tisanes cultivées dans le sud de la France<br><br><br>Vous en saurez plus un peu plus loin 😉</p>
       </div>
-      
-      <div class="product-card">
+      <div class="product-card" onclick="selectProduct(this, 'Tisanes d’Espagne')">
         <div class="product-image" style="background-image: url('/Users/bahloic/Downloads/portfolio/tisane2.jpg');"></div>
         <h3>Tisanes d’Espagne</h3>
-        <p>Tisanes cultivées en Espagne<Br><Br><Br> Vous en saurez plus un peu plus loin 😉</p>
+        <p>Tisanes cultivées en Espagne<br><br><br>Vous en saurez plus un peu plus loin 😉</p>
       </div>
-      <div class="product-card">
+      <div class="product-card" onclick="selectProduct(this, 'Tisanes marocaines')">
         <div class="product-image" style="background-image: url('/Users/bahloic/Downloads/portfolio/tisane3.jpg');"></div>
         <h3>Tisanes marocaines</h3>
-        <p>Tisanes des montagnes marocaines<Br><Br><Br> Vous en saurez plus un peu plus loin 😉</p>
+        <p>Tisanes des montagnes marocaines<br><br><br>Vous en saurez plus un peu plus loin 😉</p>
       </div>
-      <div class="product-card">
+      <div class="product-card" onclick="selectProduct(this, 'Tisanes bio')">
         <div class="product-image" style="background-image: url('/Users/bahloic/Downloads/portfolio/tisane4.jpg');"></div>
         <h3>Tisanes bio</h3>
-        <p>Tisanes issues de cultures biologiques<Br><Br><Br> Vous en saurez plus un peu plus loin 😉</p>
+        <p>Tisanes issues de cultures biologiques<br><br><br>Vous en saurez plus un peu plus loin 😉</p>
       </div>
     </div>
+
+    <!-- Affichage du produit sélectionné -->
+    <div id="produit-selectionne">Aucun produit sélectionné</div>
+
+    <!-- Bouton de validation -->
+    <button class="search-button" onclick="window.location.href='quatrieme page.html'">
+      Validez votre choix
+    </button>
   </div>
-<!-- Bouton de validation -->
-<button class="search-button" onclick="window.location.href='quatrieme page.html'">
-  Validez votre choix
-</button>
+
+  <script>
+    function selectProduct(el, produitNom) {
+      // Supprimer les sélections précédentes
+      document.querySelectorAll('.product-card').forEach(card => card.classList.remove('selected'));
+      
+      // Marquer le produit sélectionné
+      el.classList.add('selected');
+
+      // Enregistrer dans localStorage
+      localStorage.setItem("produitSelectionne", produitNom);
+
+      // Afficher dans la zone de texte
+      document.getElementById("produit-selectionne").textContent = `Produit sélectionné : ${produitNom}`;
+    }
+  </script>
 
 </body>
 </html>
-
