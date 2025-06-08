@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Étape Finale - Résumé</title>
+  <title>Étape 4 – Mise en œuvre</title>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       padding: 0;
@@ -15,31 +16,62 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       min-height: 100vh;
-      text-align: center;
-      padding: 20px;
+      position: relative;
     }
+
     #dyn-island {
-      position: fixed;
-      top: 20px;
+      position: absolute;
+      top: 30px;
       left: 50%;
       transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #dyn-island .header {
       background: #000;
       color: #fff;
-      padding: 12px 24px;
+      font-size: 1rem;
       border-radius: 32px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      padding: 12px 24px;
+      white-space: nowrap;
       display: flex;
       align-items: center;
       gap: 10px;
-      font-size: 1rem;
+      height: 48px;
     }
+
+    .svg-icon {
+      width: 20px;
+      height: 20px;
+      animation: rotate 3s linear infinite;
+    }
+
     .green-dot {
       width: 10px;
       height: 10px;
       background-color: #2ecc71;
       border-radius: 50%;
     }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .main-content {
+      margin-top: 160px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      width: 100%;
+      padding: 0 20px;
+    }
+
     .photo-frame {
       width: 200px;
       height: 200px;
@@ -48,137 +80,224 @@
       background-color: #f0f0f0;
       background-size: cover;
       background-position: center;
-      margin-top: 100px;
     }
-    h2 {
-      color: #2ecc71;
-      margin-top: 30px;
-    }
-    .summary-box {
-      margin-top: 20px;
-      border: 2px solid #2ecc71;
-      border-radius: 12px;
-      padding: 20px;
-      max-width: 800px;
-      width: 100%;
-      background: #f0fff5;
-      text-align: left;
-    }
-    .total-box {
-      margin-top: 20px;
-      font-weight: bold;
+
+    .step-title {
+      font-size: 1.2rem;
       color: #333;
-      background: #eafaf0;
-      padding: 10px 20px;
-      border-radius: 10px;
+      text-align: center;
     }
-    .currency-selector {
-      margin-top: 10px;
+
+    .input-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      max-width: 400px;
     }
-    .button-group {
-      margin-top: 30px;
+
+    .input-wrapper input[type="text"] {
+      padding: 14px 20px;
+      font-size: 1rem;
+      border: 2px solid #2ecc71;
+      border-radius: 32px;
+      outline: none;
+      width: 100%;
+    }
+
+    .button-row {
       display: flex;
       justify-content: center;
-      gap: 20px;
+      gap: 10px;
+      width: 100%;
     }
-    .search-button {
-      padding: 12px 24px;
-      font-size: 1rem;
-      background-color: #4381C1;
+
+    .button-row button {
+      flex: 1;
+      padding: 10px 18px;
+      background-color: #2ecc71;
       color: white;
       border: none;
-      border-radius: 8px;
+      border-radius: 24px;
+      font-size: 1rem;
       cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
     }
-    .search-button:hover {
-      background-color: #3568a1;
+
+    .button-row button:hover {
+      background-color: #27ae60;
+      transform: scale(1.02);
     }
+
+    .next-step {
+      margin-top: 40px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .next-step button {
+      flex: 1;
+      padding: 10px 18px;
+      color: white;
+      border: none;
+      border-radius: 24px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .next-step button:first-child {
+      background-color: #2c3e50;
+    }
+
+    .next-step button:first-child:hover {
+      background-color: #1a252f;
+      transform: scale(1.02);
+    }
+
     .reset-btn {
-      padding: 12px 24px;
-      font-size: 1rem;
       background-color: #e74c3c;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
     }
+
     .reset-btn:hover {
       background-color: #c0392b;
+      transform: scale(1.02);
     }
-    .note {
-      margin-top: 20px;
-      font-size: 0.9rem;
-      color: #666;
+
+    .user-entries, .summary-list {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .entry-tag {
+      background-color: #2ecc71;
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .entry-tag button {
+      background: #fff;
+      color: #2ecc71;
+      font-weight: bold;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      padding: 0;
+      line-height: 18px;
+      font-size: 0.8rem;
+      border: none;
+      cursor: pointer;
+    }
+
+    .summary-title {
+      margin-top: 30px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #2ecc71;
+      text-align: center;
     }
   </style>
 </head>
 <body>
-  <div id="dyn-island">
-    MaRoadMap <div class="green-dot"></div> • Étape Finale
-  </div>
-  <div class="photo-frame" style="background-image: url('https://images.unsplash.com/photo-1618411442570-6fae202ea36d');"></div>
-  <h2>Récapitulatif de vos choix</h2>
-  <div class="summary-box" id="recap"></div>
-  <div class="total-box" id="estimation">
-    Estimation totale : <span id="prixTotal">0€</span> (prix indicatif)
-  </div>
-  <div class="currency-selector">
-    <label for="devise">Changer la devise : </label>
-    <select id="devise" onchange="changerDevise()">
-      <option value="EUR">EUR (€)</option>
-      <option value="USD">USD ($)</option>
-      <option value="XOF">XOF (F CFA)</option>
-    </select>
-  </div>
-  <div class="note">Chaque professionnel sélectionné recevra une notification avec votre demande.</div>
 
-  <div class="button-group">
-    <button class="search-button" onclick="envoyerDemandes()">Envoyer les demandes aux professionnels</button>
-    <button class="reset-btn" onclick="resetRoadmap()">Réinitialiser</button>
+  <!-- Dynamic Island -->
+  <div id="dyn-island">
+    <div class="header">
+      <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M12 6v6l4 2" />
+      </svg>
+      MaRoadMap
+      <div class="green-dot"></div>
+      • Quatrième étape
+    </div>
+  </div>
+
+  <!-- Contenu principal -->
+  <div class="main-content">
+    <div class="photo-frame" style="background-image: url('https://images.unsplash.com/photo-1618411442570-6fae202ea36d');"></div>
+
+    <div class="step-title">
+      De quoi avez-vous besoin pour concrétiser votre projet ?<br>
+      (ex : sachets personnalisés, site internet…)
+    </div>
+
+    <div class="input-wrapper">
+      <input type="text" id="needsInput" placeholder="Tapez ici…">
+      <div class="button-row">
+        <button onclick="addEntry()">Ajouter</button>
+        <button onclick="window.location.href='Cinquieme page.html'" onclick="validateEntries()">Valider</button>
+      </div>
+    </div>
+
+    <div class="user-entries" id="userEntries"></div>
+
+    <div class="summary-title" id="summaryTitle" style="display:none;">✅ Acquis & noté :</div>
+    <div class="summary-list" id="summaryList"></div>
+
+    <div class="next-step">
+      <button onclick="window.location.href='Cinquieme page.html'" onclick="goToNext()">Étape suivante</button>
+      <button class="reset-btn" onclick="resetRoadmap()">Réinitialiser</button>
+    </div>
   </div>
 
   <script>
-    const recapContainer = document.getElementById('recap');
-    const totalBox = document.getElementById('prixTotal');
-    const selections = JSON.parse(localStorage.getItem("selectedProfessionals")) || {};
-    let total = 0;
+    const input = document.getElementById('needsInput');
+    const entriesContainer = document.getElementById('userEntries');
+    const summaryTitle = document.getElementById('summaryTitle');
+    const summaryContainer = document.getElementById('summaryList');
 
-    function renderRecap() {
-      recapContainer.innerHTML = '<h3>Choix précédents</h3>';
-      const previousChoices = JSON.parse(localStorage.getItem("produitSelectionne")) || [];
-      if (previousChoices.length) {
-        recapContainer.innerHTML += '<ul>' + previousChoices.map(p => `<li>${p}</li>`).join('') + '</ul>';
-        recapContainer.innerHTML += '<hr />';
+    let entries = [];
+
+    function addEntry() {
+      const value = input.value.trim();
+      if (value !== '') {
+        entries.push(value);
+        input.value = '';
+        renderEntries();
       }
-      for (const [cat, items] of Object.entries(selections)) {
-        if (items.length) {
-          recapContainer.innerHTML += `<h3>${cat}</h3><ul>` + items.map(item => {
-            const match = item.desc.match(/([\d.,]+)/);
-            const price = match ? parseFloat(match[1].replace(',', '.')) : 0;
-            total += price;
-            return `<li><strong>${item.name}</strong> - ${item.desc}</li>`;
-          }).join('') + '</ul>';
-        }
-      }
-      totalBox.textContent = total.toFixed(2) + '€';
     }
 
-    function changerDevise() {
-      const devise = document.getElementById("devise").value;
-      let converted = total;
-      let symbole = '€';
-      if (devise === "USD") {
-        converted = (total * 1.08).toFixed(2);
-        symbole = "$";
-      } else if (devise === "XOF") {
-        converted = (total * 655.957).toFixed(0);
-        symbole = "F CFA";
-      }
-      totalBox.textContent = converted + symbole;
+    function removeEntry(index) {
+      entries.splice(index, 1);
+      renderEntries();
     }
 
-    function envoyerDemandes() {
-      alert("Vos demandes ont été envoyées aux professionnels sélectionnés !");
+    function renderEntries() {
+      entriesContainer.innerHTML = '';
+      entries.forEach((item, index) => {
+        const tag = document.createElement('div');
+        tag.className = 'entry-tag';
+        tag.innerHTML = `${item} <button onclick="removeEntry(${index})">×</button>`;
+        entriesContainer.appendChild(tag);
+      });
+    }
+
+    function validateEntries() {
+      summaryTitle.style.display = 'block';
+      summaryContainer.innerHTML = '';
+      entries.forEach(item => {
+        const tag = document.createElement('div');
+        tag.className = 'entry-tag';
+        tag.textContent = item;
+        summaryContainer.appendChild(tag);
+      });
+    }
+
+    function goToNext() {
+      alert("Étape suivante à venir ! ✅");
     }
 
     function resetRoadmap() {
@@ -186,8 +305,7 @@
       alert("Toutes vos données ont été supprimées. Vous allez revenir à l'étape de départ.");
       window.location.href = "index.html";
     }
-
-    renderRecap();
   </script>
+
 </body>
 </html>
