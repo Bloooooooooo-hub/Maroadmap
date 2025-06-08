@@ -144,7 +144,12 @@
     let total = 0;
 
     function renderRecap() {
-      recapContainer.innerHTML = '';
+      recapContainer.innerHTML = '<h3>Choix précédents</h3>';
+      const previousChoices = JSON.parse(localStorage.getItem("produitSelectionne")) || [];
+      if (previousChoices.length) {
+        recapContainer.innerHTML += '<ul>' + previousChoices.map(p => `<li>${p}</li>`).join('') + '</ul>';
+        recapContainer.innerHTML += '<hr />';
+      }
       for (const [cat, items] of Object.entries(selections)) {
         if (items.length) {
           recapContainer.innerHTML += `<h3>${cat}</h3><ul>` + items.map(item => {
