@@ -222,9 +222,27 @@
 
   <script>
     function selectProduct(el, produitNom) {
-      // Supprimer les sélections précédentes
-      document.querySelectorAll('.product-card').forEach(card => card.classList.remove('selected'));
-      
+  const selectedCards = document.querySelectorAll('.product-card.selected');
+
+  if (el.classList.contains('selected')) {
+    el.classList.remove('selected');
+  } else if (selectedCards.length < 3) {
+    el.classList.add('selected');
+  } else {
+    alert("Vous pouvez sélectionner jusqu'à 3 produits maximum.");
+    return;
+  }
+
+  // Mettre à jour localStorage avec les titres sélectionnés
+  const noms = Array.from(document.querySelectorAll('.product-card.selected h3')).map(h3 => h3.textContent);
+  localStorage.setItem("produitSelectionne", JSON.stringify(noms));
+
+  // Afficher
+  document.getElementById("produit-selectionne").textContent = noms.length > 0
+    ? `Produits sélectionnés : ${noms.join(", ")}`
+    : "Aucun produit sélectionné";
+}
+
       // Marquer le produit sélectionné
       el.classList.add('selected');
 
