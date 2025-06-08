@@ -292,6 +292,12 @@
   </script>
 
   <style>
+    .reset-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
     .reset-btn {
       padding: 10px 20px;
       font-size: 1rem;
@@ -300,17 +306,29 @@
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      display: flex;
-      justify-content: center;
-      gap: 11px;
-      width: 100%;
     }
     .reset-btn:hover {
       background-color: #c0392b;
     }
+    .search-button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #4381C1;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .search-button:hover {
+      background-color: #3568a1;
+    }
   </style>
 
-  <button class="reset-btn user-entries" onclick="resetRoadmap()">Réinitialiser</button>
+<body>
+  <div class="reset-row">
+    <button class="search-button" onclick="window.location.href='Cinquieme etape.html'">Passez à l'étape suivante</button>
+    <button class="reset-btn" onclick="resetRoadmap()">Réinitialiser</button>
+  </div>
 
   <script>
     function resetRoadmap() {
