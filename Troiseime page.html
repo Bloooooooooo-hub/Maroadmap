@@ -221,17 +221,32 @@
   </div>
 
   <script>
-    function selectProduct(el, produitNom) {
-  const selectedCards = document.querySelectorAll('.product-card.selected');
+   <script>
+  function selectProduct(el, produitNom) {
+    // Si déjà sélectionné → on retire
+    if (el.classList.contains('selected')) {
+      el.classList.remove('selected');
+    } else {
+      // Vérifie combien sont déjà sélectionnés
+      const selected = document.querySelectorAll('.product-card.selected');
+      if (selected.length >= 3) {
+        alert("Vous pouvez sélectionner jusqu'à 3 produits maximum.");
+        return;
+      }
+      el.classList.add('selected');
+    }
 
-  if (el.classList.contains('selected')) {
-    el.classList.remove('selected');
-  } else if (selectedCards.length < 3) {
-    el.classList.add('selected');
-  } else {
-    alert("Vous pouvez sélectionner jusqu'à 3 produits maximum.");
-    return;
+    // Mise à jour du localStorage
+    const noms = Array.from(document.querySelectorAll('.product-card.selected h3')).map(h3 => h3.textContent);
+    localStorage.setItem("produitSelectionne", JSON.stringify(noms));
+
+    // Mise à jour du texte affiché
+    document.getElementById("produit-selectionne").textContent = noms.length
+      ? `Produits sélectionnés : ${noms.join(", ")}`
+      : "Aucun produit sélectionné";
   }
+</script>
+
 
   // Mettre à jour localStorage avec les titres sélectionnés
   const noms = Array.from(document.querySelectorAll('.product-card.selected h3')).map(h3 => h3.textContent);
